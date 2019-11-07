@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.yuezhu.crawler.model"/>
+        <property name="mapperLocations" value="classpath:/mappings/**/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.yuezhu.crawler.dao"/>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://192.168.1.5:3306/yuezhu_daiketong?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=CTT"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <bean id="cmCfg" class="com.yuezhu.crawler.model.CmConfig">
+        <!-- 365===> 1-2 -->
+<!--                  <property name="startUrl" value="http://nj.rent.house365.com/district_d8-s149-i1/dl_r1-x1-j1.html" />-->
+<!--                <property name="startUrl" value="http://nj.sell.house365.com/district_d8-i1/dl_j6-m5-fe15.html"/>-->
+        <!-- anjuke===> 3 -->
+        <!--                  <property name="startUrl" value="https://nj.zu.anjuke.com/fangyuan/jiangninga/fx3-l2-p2-zj49/" />-->
+        <!-- wuba===> 4-7 -->
+<!--                          <property name="startUrl" value="https://nj.58.com/jiangning/zufang/0/b3j3/?PGTID=0d300008-00b9-512d-67e3-5ec9978acef7&amp;ClickID=2" />-->
+<!--                          <property name="startUrl" value="https://nj.58.com/shangpucs/0/pve_1111_511572/?huansuanyue=200_300&amp;PGTID=0d306b36-000a-c47c-4000-1679257034b4&amp;ClickID=2" />-->
+<!--                          <property name="startUrl" value="https://nj.58.com/jiangning/zhaozu/0/pve_1092_2/?PGTID=0d30000d-07e4-672c-0243-5be19520fb1c&amp;ClickID=1" />-->
+<!--                          <property name="startUrl" value="https://nj.58.com/bjhnj/ershoufang/0/?PGTID=0d30000c-00b9-5755-7a56-b3e064aac723&amp;ClickID=1" />-->
+        <!-- fangduoduo===> 8 -->
+        <!--                  <property name="startUrl" value="https://nanjing.fangdd.com/zufang-s4_v3/" />-->
+        <!--fang_tian_xia ==>10-13 -->
+        <!--                  <property name="startUrl" value="https://nanjing.zu.fang.com/house-a0268-b02889/a21-g23-n31/" />-->
+        <!--                  <property name="startUrl" value="https://nanjing.esf.fang.com/house-a0268-b02889/a211/" />-->
+        <!--                  <property name="startUrl" value="https://nanjing.office.fang.com/zu/house-a0268-b02889/a21/" />-->
+        <!--                  <property name="startUrl" value="https://nanjing.shop.fang.com/shou/house/a21/" />-->
+
+        <!-- wuba===> 商铺=》出租/出售  14 -->
+<!--            <property name="startUrl" value="https://nj.58.com/shangpucz/" />&lt;!&ndash; 非必须&ndash;&gt;-->
+<!--            <property name="startUrl" value="https://nj.58.com/shangpucs/" />&lt;!&ndash; 非必须&ndash;&gt;-->
+        <!-- wuba===> 写字楼=》出租/出售 16 -->
+            <property name="startUrl" value="https://nj.58.com/zhaozu/" /><!-- 非必须-->
+<!--            <property name="startUrl" value="https://nj.58.com/zhaozu/" />&lt;!&ndash; 非必须&ndash;&gt;-->
+
+
+            <property name="startUrlSuf" value="pve_1092_2" /><!--非必须 -->
+                <property name="tokens" value=""/>
+                <property name="thread" value="1"/>
+                <property name="sleepTime" value="1"/>
+                <property name="webSiteFlag" value="14"/><!-- 非必须-->
+        <!--        <property name="webSiteCharset" value="GBK"/>-->
+    </bean>
+</beans>
